@@ -1,7 +1,9 @@
 package info.developerblog.examples.thirft.simpleclient;
 
+import example.TCustomException;
 import org.apache.commons.pool2.KeyedObjectPool;
 import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
+import org.apache.thrift.TApplicationException;
 import org.apache.thrift.transport.TTransportException;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,6 +65,39 @@ public class TGreetingServiceHandlerTests {
     @Test
     public void testMappedClient() throws Exception {
         greetingService.getGreetingForKey("key1", "Doe", "John");
+    }
+
+    @Test(expected = TCustomException.class)
+    public void testMappedClientWithCustomException() throws Exception {
+        final String smith = "Smith";
+        try {
+            greetingService.getCustomException(smith, "John");
+        } catch (TCustomException e) {
+            assertEquals(e.getMessage(), "You are not welcome here " + smith);
+            throw e;
+        }
+    }
+
+    @Test(expected = TApplicationException.class)
+    public void testMappedClientWithRuntimeException1() throws Exception {
+        final String smith = "Smith";
+        try {
+            greetingService.getRuntimeException1(smith, "John");
+        } catch (TCustomException e) {
+            assertEquals(e.getMessage(), "Internal error processing runtimeException1");
+            throw e;
+        }
+    }
+
+    @Test(expected = TTransportException.class)
+    public void testMappedClientWithRuntimeException2() throws Exception {
+        final String smith = "Smith";
+        try {
+            greetingService.getRuntimeException2(smith, "John");
+        } catch (TTransportException e) {
+            assertEquals(e.getMessage(), "HTTP Response code: 406");
+            throw e;
+        }
     }
 
     @Test(expected = TTransportException.class)
