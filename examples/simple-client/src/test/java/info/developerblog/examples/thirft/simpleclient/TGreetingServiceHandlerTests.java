@@ -78,7 +78,7 @@ public class TGreetingServiceHandlerTests {
         final String smith = "Smith";
         try {
             greetingService.getCustomException(smith, "John");
-        } catch (TCustomException e) {
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "You are not welcome here " + smith);
             throw e;
         }
@@ -89,7 +89,7 @@ public class TGreetingServiceHandlerTests {
         final String smith = "Smith";
         try {
             greetingService.getRuntimeException1(smith, "John");
-        } catch (TCustomException e) {
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "Internal error processing runtimeException1");
             throw e;
         }
@@ -100,7 +100,7 @@ public class TGreetingServiceHandlerTests {
         final String smith = "Smith";
         try {
             greetingService.getRuntimeException2(smith, "John");
-        } catch (TTransportException e) {
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "HTTP Response code: 406");
             throw e;
         }
