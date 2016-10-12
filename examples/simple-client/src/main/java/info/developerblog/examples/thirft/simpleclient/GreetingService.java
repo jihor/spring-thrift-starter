@@ -22,6 +22,9 @@ public class GreetingService {
     @ThriftClient(serviceId = "greeting-service-with-timeouts", path = "/api")
     TGreetingService.Client clientWithTimeout;
 
+    @ThriftClient(serviceId = "greeting-service", path = "/api-with-exceptions")
+    TGreetingServiceWithExceptions.Client clientWithExceptions;
+
     @ThriftClient(serviceId = "greeting-service-with-timeouts-oneoff", path = "/api")
     TGreetingService.Client oneoffClientWithTimeout;
 

@@ -1,5 +1,6 @@
 package info.developerblog.examples.thirft.simpleclient;
 
+import example.TCustomException;
 import info.developerblog.examples.thirft.simpleclient.configuration.CountingAspect;
 import info.developerblog.examples.thirft.simpleclient.configuration.TestConfiguration;
 import example.TCustomException;
